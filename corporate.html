@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SoldFast — Guaranteed cash offers on Gauteng property</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,500..800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F5F8; --card:#FFFFFF; --blue:#0B3C8C; --blue-2:#082C68; --blue-tint:#E3EBF8;
+  --ink:#151A22; --muted:#525C69; --line:#D3D9E2; --ok:#1C8B4E; --ok-tint:#E4F4EA;
+  --shadow:0 12px 32px -18px rgba(11,60,140,.35);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0F131A; --card:#171D27; --blue:#8FB3F2; --blue-2:#5C8AD8; --blue-tint:#1A2A45;
+  --ink:#EDF0F4; --muted:#A3ACB8; --line:#2A3441; --ok:#5CCB8B; --ok-tint:#173124;
+  --shadow:0 12px 32px -18px rgba(0,0,0,.7);
+}}
+:root[data-theme="dark"]{
+  --bg:#0F131A; --card:#171D27; --blue:#8FB3F2; --blue-2:#5C8AD8; --blue-tint:#1A2A45;
+  --ink:#EDF0F4; --muted:#A3ACB8; --line:#2A3441; --ok:#5CCB8B; --ok-tint:#173124;
+  --shadow:0 12px 32px -18px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Archivo","Public Sans",sans-serif;font-variation-settings:"wdth" 100;line-height:1.08;letter-spacing:-.015em;color:var(--ink)}
+h1{font-size:clamp(2.3rem,5.4vw,3.9rem);font-weight:800}
+h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:700;margin-bottom:.5em}
+h3{font-size:1.1rem;font-weight:700}
+p{max-width:62ch}
+a{color:inherit}
+.wrap{width:min(1140px,100% - 2.5rem);margin-inline:auto}
+section{padding:4.5rem 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;padding:.9rem 1.5rem;border-radius:4px;border:0;cursor:pointer;text-decoration:none;font-size:1rem;transition:background .15s}
+.btn:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:var(--blue-2)}
+.btn-line{background:transparent;color:var(--blue);border:2px solid var(--blue)}.btn-line:hover{background:var(--blue-tint)}
+.btn-wa{background:#25D366;color:#063}.btn-wa:hover{background:#1EBE5A}
+.btn svg{width:18px;height:18px}
+
+/* top bar + header */
+.topbar{background:var(--blue-2);color:#fff;font-size:.9rem;font-weight:600}
+.topbar .wrap{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;flex-wrap:wrap}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .topbar{background:#0A1E3F}}
+:root[data-theme="dark"] .topbar{background:#0A1E3F}
+header{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:"Archivo",sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.03em;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:.5rem}
+.logo i{width:30px;height:30px;background:var(--blue);border-radius:4px;display:grid;place-items:center;color:#fff;font-style:normal;font-size:1rem}
+.nav ul{display:flex;gap:1.8rem;list-style:none}
+.nav ul a{text-decoration:none;color:var(--muted);font-weight:600;font-size:.98rem}
+.nav ul a:hover{color:var(--blue)}
+@media(max-width:860px){.nav ul{display:none}}
+
+/* hero */
+.hero{padding:4rem 0 3.5rem}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:3.5rem;align-items:center}
+.hero .lede{font-size:1.18rem;color:var(--muted);margin:1.1rem 0 1.6rem}
+.hero .ctas{display:flex;gap:.75rem;flex-wrap:wrap}
+.stats{display:flex;gap:2.2rem;margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--line);flex-wrap:wrap}
+.stats div strong{display:block;font-family:"Archivo",sans-serif;font-size:1.8rem;font-weight:800;color:var(--blue);line-height:1}
+.stats div span{font-size:.9rem;color:var(--muted);font-weight:600}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+
+/* offer letter */
+.letter{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);padding:1.8rem 2rem;position:relative;font-size:.95rem}
+.letter::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--blue)}
+.letter .head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem}
+.letter .head h3{font-size:1.2rem}
+.letter .head span{color:var(--muted);font-size:.85rem}
+.letter .ref{font-size:.8rem;color:var(--muted);text-align:right}
+.letter table{width:100%;border-collapse:collapse}
+.letter td{padding:.55rem 0;border-bottom:1px solid var(--line)}
+.letter td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.letter tr.total td{border-bottom:0;border-top:2px solid var(--ink);padding-top:.8rem;font-family:"Archivo",sans-serif;font-weight:800;font-size:1.15rem}
+.letter tr.total td:last-child{color:var(--blue)}
+.letter .stamp{position:absolute;right:1.6rem;bottom:4.2rem;border:3px solid var(--ok);color:var(--ok);font-family:"Archivo",sans-serif;font-weight:800;padding:.3rem .7rem;transform:rotate(-6deg);font-size:.95rem;letter-spacing:.04em;background:var(--ok-tint)}
+.letter .foot{margin-top:1.4rem;display:flex;justify-content:space-between;gap:1rem;font-size:.85rem;color:var(--muted);flex-wrap:wrap}
+.letter .foot b{display:block;color:var(--ink);font-weight:700}
+
+/* lead form band */
+.leadband{background:var(--blue);color:#fff;padding:2.2rem 0}
+.leadband .wrap{display:grid;grid-template-columns:.8fr 1.4fr;gap:2rem;align-items:center}
+.leadband h3{color:#fff;font-size:1.35rem}
+.leadband p{color:rgba(255,255,255,.82);margin-top:.3rem}
+.leadband form{display:grid;grid-template-columns:1.5fr 1fr 1fr auto;gap:.7rem}
+.leadband label{display:block;font-size:.8rem;font-weight:700;margin-bottom:.3rem;color:rgba(255,255,255,.85)}
+.leadband input,.leadband select{width:100%;height:50px;font:inherit;padding:0 .8rem;border:0;border-radius:4px;background:#fff;color:#151A22}
+.leadband .btn{align-self:end;height:50px;background:#fff;color:var(--blue-2)}
+.leadband .btn:hover{background:#EAF0FB}
+.leadband small{grid-column:1/-1;font-size:.82rem;color:rgba(255,255,255,.75)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .leadband{background:#123A80}}
+:root[data-theme="dark"] .leadband{background:#123A80}
+@media(max-width:900px){.leadband .wrap{grid-template-columns:1fr}.leadband form{grid-template-columns:1fr 1fr}.leadband form>div:first-child,.leadband .btn{grid-column:1/-1}}
+
+/* process */
+.process{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:2rem;border:1px solid var(--line);background:var(--card)}
+.pstep{padding:1.6rem 1.4rem;border-right:1px solid var(--line)}
+.pstep:last-child{border-right:0}
+.pstep .n{font-family:"Archivo",sans-serif;font-weight:800;font-size:2.4rem;color:var(--blue);line-height:1}
+.pstep .t{font-size:.85rem;font-weight:700;color:var(--ok);margin:.4rem 0 .5rem}
+.pstep p{color:var(--muted);font-size:.95rem}
+@media(max-width:900px){.process{grid-template-columns:1fr 1fr}.pstep:nth-child(2){border-right:0}.pstep:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media(max-width:560px){.process{grid-template-columns:1fr}.pstep{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* guarantees */
+.guar{background:var(--card);border-block:1px solid var(--line)}
+.ggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem}
+.g{padding-left:1.1rem;border-left:4px solid var(--blue)}
+.g p{color:var(--muted);font-size:.98rem;margin-top:.3rem}
+@media(max-width:800px){.ggrid{grid-template-columns:1fr}}
+
+/* compare */
+.cmp{overflow-x:auto;margin-top:2rem;background:var(--card);border:1px solid var(--line)}
+table.c{width:100%;border-collapse:collapse;min-width:560px}
+table.c th,table.c td{padding:.95rem 1rem;text-align:left;border-bottom:1px solid var(--line)}
+table.c th{font-family:"Archivo",sans-serif;font-weight:700}
+table.c th.us,table.c td.us{background:var(--blue-tint);font-weight:700}
+table.c th.us{color:var(--blue)}
+table.c td:first-child{color:var(--muted)}
+
+/* situations */
+.sits{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+.s{background:var(--card);border:1px solid var(--line);padding:1.3rem;display:flex;flex-direction:column;gap:.4rem}
+.s p{color:var(--muted);font-size:.95rem}
+.s a{color:var(--blue);font-weight:700;text-decoration:none;margin-top:auto}
+@media(max-width:900px){.sits{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.sits{grid-template-columns:1fr}}
+
+/* team + faq */
+.people{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
+.person{display:flex;gap:1rem;align-items:center;background:var(--card);border:1px solid var(--line);padding:1.2rem}
+.person .av{width:64px;height:64px;background:var(--blue-tint);color:var(--blue);display:grid;place-items:center;font-family:"Archivo",sans-serif;font-weight:800;flex:none}
+.person p{color:var(--muted);font-size:.92rem}
+@media(max-width:700px){.people{grid-template-columns:1fr}}
+details{border-bottom:1px solid var(--line);padding:1rem 0}
+summary{cursor:pointer;font-weight:700;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+summary::after{content:"+";color:var(--blue);font-size:1.4rem;font-weight:400}
+details[open] summary::after{content:"–"}
+details p{margin-top:.6rem;color:var(--muted)}
+
+footer.site{background:var(--blue-2);color:rgba(255,255,255,.8);padding:3rem 0 6rem;font-size:.92rem}
+footer.site .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem}
+footer.site ul{list-style:none;display:grid;gap:.4rem}
+footer.site a{text-decoration:none}
+footer.site a:hover{text-decoration:underline}
+footer.site .logo{color:#fff}
+@media(max-width:700px){footer.site .wrap{grid-template-columns:1fr}}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) footer.site{background:#0A1E3F}}
+:root[data-theme="dark"] footer.site{background:#0A1E3F}
+
+.bar{position:fixed;bottom:0;left:0;right:0;display:none;gap:.6rem;padding:.7rem .9rem calc(.7rem + env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--line);z-index:30}
+.bar .btn{flex:1}
+@media(max-width:860px){.bar{display:flex}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap"><span>Registered cash property buyer · CIPC 2024/XXXXXX/07</span><span>Mon–Sun 07:00–20:00 · 072 388 6161</span></div></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><i>S</i>SoldFast</a>
+    <ul>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#guarantees">Our guarantees</a></li>
+      <li><a href="#compare">Compare</a></li>
+      <li><a href="#situations">Who we help</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn-blue" href="#offer">Request an offer</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>A guaranteed cash offer on your property, in writing, within 24 hours.</h1>
+      <p class="lede">SoldFast buys residential property across Gauteng directly, with no agents, no bond approval and no commission. Every offer is itemised and paid through an attorney's trust account.</p>
+      <div class="ctas">
+        <a class="btn btn-blue" href="#offer">Request an offer</a>
+        <a class="btn btn-line" href="https://wa.me/27723886161">Speak to a buyer on WhatsApp</a>
+      </div>
+      <div class="stats">
+        <div><strong>24h</strong><span>Written offer after viewing</span></div>
+        <div><strong>R0</strong><span>Commission or fees</span></div>
+        <div><strong>140+</strong><span>Gauteng properties bought</span></div>
+      </div>
+    </div>
+
+    <div class="letter" aria-label="Sample written cash offer">
+      <div class="head">
+        <div><h3>Cash offer to purchase</h3><span>Sample — every seller receives one of these</span></div>
+        <div class="ref">Ref SF-2026-0417<br>Issued within 24h of viewing</div>
+      </div>
+      <table>
+        <tr><td>Property</td><td>12 Acacia Rd, Boksburg</td></tr>
+        <tr><td>Independent market value</td><td>R 1 200 000</td></tr>
+        <tr><td>Cash offer (85%)</td><td>R 1 020 000</td></tr>
+        <tr><td>Bond settled by SoldFast</td><td>– R 650 000</td></tr>
+        <tr><td>Rates &amp; levy arrears settled by SoldFast</td><td>– R 48 000</td></tr>
+        <tr><td>Transfer costs</td><td>Paid by SoldFast</td></tr>
+        <tr class="total"><td>Paid to seller</td><td>R 322 000</td></tr>
+      </table>
+      <div class="stamp">NO HIDDEN DEDUCTIONS</div>
+      <div class="foot">
+        <div><b>Payment via</b>[Attorney firm] trust account</div>
+        <div><b>Valid for</b>7 days, no obligation</div>
+        <div><b>Buyer</b>W. Prinsloo, SoldFast (Pty) Ltd</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="leadband" id="offer">
+  <div class="wrap">
+    <div><h3>Request your written offer</h3><p>We respond within one working hour and arrange a viewing at your convenience.</p></div>
+    <form onsubmit="event.preventDefault()">
+      <div><label for="addr">Property address or suburb</label><input id="addr" placeholder="12 Acacia Rd, Boksburg"></div>
+      <div><label for="type">Property type</label><select id="type"><option>House</option><option>Townhouse</option><option>Flat</option><option>Plot / other</option></select></div>
+      <div><label for="ph">Cellphone</label><input id="ph" type="tel" placeholder="072 000 0000"></div>
+      <button class="btn" type="submit">Request offer</button>
+      <small>No obligation. Your details are processed in accordance with POPIA and never shared.</small>
+    </form>
+  </div>
+</div>
+
+<section id="process">
+  <div class="wrap">
+    <h2>A defined four-step process</h2>
+    <p style="color:var(--muted)">You know what happens next at every stage, and when.</p>
+    <div class="process">
+      <div class="pstep"><div class="n">1</div><div class="t">Day 0</div><h3>Property details</h3><p>You give us the address, condition and outstanding balances. We provide an indicative range the same day.</p></div>
+      <div class="pstep"><div class="n">2</div><div class="t">Within 24 hours</div><h3>Viewing and written offer</h3><p>A 20-minute viewing followed by an itemised offer, valid for seven days.</p></div>
+      <div class="pstep"><div class="n">3</div><div class="t">Day 2–3</div><h3>Agreement and settlement</h3><p>Offer to purchase signed. We settle bond, rates and levy arrears directly with the creditors.</p></div>
+      <div class="pstep"><div class="n">4</div><div class="t">Within 24 hours of signing</div><h3>Payment to you</h3><p>Funds released via the conveyancing attorney's trust account. Transfer completes in the background.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="guar" id="guarantees">
+  <div class="wrap">
+    <h2>Three commitments on every purchase</h2>
+    <div class="ggrid">
+      <div class="g"><h3>Every deduction in writing</h3><p>The offer letter lists market value, our percentage, and each balance we settle. Nothing is added later.</p></div>
+      <div class="g"><h3>Payment through an attorney</h3><p>Money moves through an independent conveyancer's trust account, exactly as in any conventional sale.</p></div>
+      <div class="g"><h3>No obligation at any stage</h3><p>You can walk away after the viewing or after the offer. There is no fee and no penalty.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <h2>Net proceeds compared</h2>
+    <p style="color:var(--muted)">The relevant figure is what you receive after costs, not the listing price.</p>
+    <div class="cmp">
+      <table class="c">
+        <thead><tr><th></th><th class="us">SoldFast</th><th>Estate agent</th><th>Sale in execution</th></tr></thead>
+        <tbody>
+          <tr><td>Time to sale</td><td class="us">24 hours</td><td>3–6 months</td><td>6–12 months</td></tr>
+          <tr><td>Commission</td><td class="us">None</td><td>5–7.5% + VAT</td><td>Sheriff and legal costs</td></tr>
+          <tr><td>Repairs and certificates</td><td class="us">Paid by SoldFast</td><td>Paid by seller</td><td>N/A</td></tr>
+          <tr><td>Risk of collapse</td><td class="us">None — no bond required</td><td>Approx. 1 in 4 bond declines</td><td>Auction price</td></tr>
+          <tr><td>Arrears</td><td class="us">Settled by SoldFast</td><td>Settled by seller before transfer</td><td>Deducted; shortfall remains</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="situations">
+  <div class="wrap">
+    <h2>Circumstances we regularly buy in</h2>
+    <div class="sits">
+      <div class="s"><h3>Bond arrears or legal action</h3><p>Sale concluded before the bank's process completes; arrears settled as part of the transaction.</p><a href="#offer">Stop a repossession</a></div>
+      <div class="s"><h3>Deceased estates</h3><p>We transact directly with the executor and accept the timelines the Master's Office imposes.</p><a href="#offer">Sell an estate property</a></div>
+      <div class="s"><h3>Divorce or separation</h3><p>Single clean sale, proceeds split per the settlement agreement.</p><a href="#offer">Sell and settle</a></div>
+      <div class="s"><h3>Emigration</h3><p>Payment released before departure; occupation date agreed around your travel.</p><a href="#offer">Sell before you leave</a></div>
+      <div class="s"><h3>Non-paying tenants</h3><p>We purchase with tenants in occupation and manage the eviction ourselves.</p><a href="#offer">Sell with tenants in place</a></div>
+      <div class="s"><h3>Damaged or incomplete</h3><p>No repairs, compliance certificates or clean-up required before sale.</p><a href="#offer">Sell as is</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="guar">
+  <div class="wrap">
+    <h2>The people who sign the offer</h2>
+    <div class="people">
+      <div class="person"><div class="av">WP</div><div><h3>Werner Prinsloo</h3><p>Senior buyer. Conducts the viewing and issues the written offer.</p></div></div>
+      <div class="person"><div class="av">AF</div><div><h3>[Attorney firm]</h3><p>Independent conveyancers, Pretoria. Handle transfer and hold all funds in trust.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap" style="max-width:780px">
+    <h2>Frequently asked questions</h2>
+    <details><summary>How is the offer calculated?</summary><p>Independent market value less a fixed percentage, typically 10–20%, with every balance we settle listed. The sample letter above is the format you receive.</p></details>
+    <details><summary>How do I know the money will be paid?</summary><p>Funds are released by an independent conveyancing attorney from a trust account, exactly as in a conventional sale. You receive the firm's details before signing.</p></details>
+    <details><summary>Can you buy if the bank has already issued summons?</summary><p>Yes, provided the property has not yet been sold at auction. We liaise with the bank's attorneys and settle the arrears as part of the sale.</p></details>
+    <details><summary>When do I need to vacate?</summary><p>The occupation date is agreed with you and recorded in the offer to purchase.</p></details>
+    <details><summary>Which areas do you cover?</summary><p>All of Gauteng: Johannesburg, Pretoria, East Rand, West Rand and the Vaal Triangle.</p></details>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#"><i>S</i>SoldFast</a>
+      <p style="margin-top:.8rem">SoldFast (Pty) Ltd · CIPC 2024/XXXXXX/07<br>441 Ridgeview Road, Waterkloof Ridge, Pretoria<br>info@soldfast.co.za · 072 388 6161</p>
+    </div>
+    <ul>
+      <li><a href="#">Sell a house fast in Johannesburg</a></li>
+      <li><a href="#">Sell a house fast in Pretoria</a></li>
+      <li><a href="#">Sell a house fast on the East Rand</a></li>
+      <li><a href="#">Verkoop jou huis vir kontant</a></li>
+    </ul>
+    <ul>
+      <li><a href="#">Stop a repossession</a></li>
+      <li><a href="#">Deceased estate sales</a></li>
+      <li><a href="#">Privacy notice (POPIA)</a></li>
+      <li><a href="#">Terms</a></li>
+    </ul>
+  </div>
+</footer>
+
+<div class="bar">
+  <a class="btn btn-wa" href="https://wa.me/27723886161">WhatsApp</a>
+  <a class="btn btn-blue" href="#offer">Request offer</a>
+</div>
+</body>
+</html>
