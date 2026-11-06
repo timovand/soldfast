@@ -244,11 +244,11 @@ footer.site a:hover{text-decoration:underline}
       </div>
       <form name="full-offer" class="lead" data-form="full-offer">
         <p hidden><label>Company<input name="company" tabindex="-1" autocomplete="off"></label></p>
-        <div><label for="name">Your name</label><input id="name" name="name"></div>
-        <div><label for="ph">Cellphone</label><input id="ph" name="phone" type="tel" placeholder="072 000 0000"></div>
+        <div><label for="name">Your name</label><input id="name" name="name" required></div>
+        <div><label for="ph">Cellphone</label><input id="ph" name="phone" type="tel" required placeholder="072 000 0000"></div>
         <div><label for="email">Email</label><input id="email" name="email" type="email"></div>
-        <div class="span2"><label for="addr">Property address</label><input id="addr" name="address" placeholder="12 Acacia Rd, Boksburg"></div>
-        <div><label for="type">Property type</label><select id="type" name="type" required><option value="" selected disabled>Select</option><option>House</option><option>Townhouse</option><option>Flat</option><option>Other</option></select></div>
+        <div class="span2"><label for="addr">Property address</label><input id="addr" name="address" required placeholder="12 Acacia Rd, Boksburg"></div>
+        <div><label for="type">Property type</label><select id="type" name="type"><option value="" selected disabled>Select</option><option>House</option><option>Townhouse</option><option>Flat</option><option>Other</option></select></div>
         <div><label for="beds">Bedrooms</label><select id="beds" name="beds"><option value="" selected disabled>Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
         <div><label for="cond">Condition</label><select id="cond" name="cond"><option value="" selected disabled>Select</option><option>Good</option><option>Needs some work</option><option>Needs major work</option></select></div>
         <div><label for="occ">Who lives there?</label><select id="occ" name="occ"><option value="" selected disabled>Select</option><option>Owner</option><option>Tenants</option><option>Vacant</option></select></div>
