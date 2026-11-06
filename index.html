@@ -234,8 +234,8 @@ footer.site a:hover{text-decoration:underline}
         <h3>See what we'd pay for your property</h3>
         <p>Tell us about the property and we'll WhatsApp you a conditional offer today, with a firm offer after one short viewing.</p>
       </div>
-      <form name="full-offer" method="POST" data-netlify="true" netlify-honeypot="company" action="/thanks.html">
-        <input type="hidden" name="form-name" value="full-offer"><p hidden><label>Company<input name="company"></label></p>
+      <form name="full-offer" class="lead" data-form="full-offer">
+        <p hidden><label>Company<input name="company" tabindex="-1" autocomplete="off"></label></p>
         <div><label for="name">Your name</label><input id="name" name="name"></div>
         <div><label for="ph">Cellphone</label><input id="ph" name="ph" type="tel" placeholder="072 000 0000"></div>
         <div><label for="email">Email</label><input id="email" name="email" type="email"></div>
@@ -333,8 +333,8 @@ footer.site a:hover{text-decoration:underline}
         <h2>Rather just talk to us?</h2>
         <p>Leave your details and Werner will call you back. No forms, no obligation.</p>
       </div>
-      <form name="callback" method="POST" data-netlify="true" netlify-honeypot="company" action="/thanks.html">
-        <input type="hidden" name="form-name" value="callback"><p hidden><label>Company<input name="company"></label></p>
+      <form name="callback" class="lead" data-form="callback">
+        <p hidden><label>Company<input name="company" tabindex="-1" autocomplete="off"></label></p>
         <div><label for="cb-name">Your name</label><input id="cb-name" name="name" required></div>
         <div><label for="cb-ph">Cellphone</label><input id="cb-ph" name="phone" type="tel" required placeholder="072 000 0000"></div>
         <div><label for="cb-email">Email</label><input id="cb-email" name="email" type="email"></div>
@@ -393,5 +393,27 @@ footer.site a:hover{text-decoration:underline}
   <a class="btn btn-sold" href="#callback">Call me back</a>
 </div>
 
+<script>
+// Lead forms → n8n webhook. Set the URL below once the workflow exists.
+const WEBHOOK_URL = "https://YOUR-N8N-HOST/webhook/soldfast-lead";
+document.querySelectorAll("form.lead").forEach(f=>{
+  f.addEventListener("submit",async e=>{
+    e.preventDefault();
+    const btn=f.querySelector("button[type=submit]"); const label=btn.textContent;
+    const data=Object.fromEntries(new FormData(f).entries());
+    if(data.company){ location.href="/thanks.html"; return; } // honeypot
+    data.form=f.dataset.form; data.page=location.href; data.submitted_at=new Date().toISOString();
+    btn.disabled=true; btn.textContent="Sending…";
+    try{
+      const r=await fetch(WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+      if(!r.ok) throw new Error(r.status);
+      location.href="/thanks.html";
+    }catch(err){
+      btn.disabled=false; btn.textContent=label;
+      alert("Something went wrong sending your details. Please WhatsApp us on 072 388 6161.");
+    }
+  });
+});
+</script>
 </body>
 </html>
