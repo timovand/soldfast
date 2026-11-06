@@ -122,7 +122,7 @@ th{font-family:"Bricolage Grotesque",sans-serif;font-size:1.15rem;font-weight:70
 th.us{background:color-mix(in srgb,var(--sold) 92%,#000);border-radius:10px 10px 0 0;color:#fff}
 td.us{background:color-mix(in srgb,var(--sold) 16%,transparent);font-weight:700}
 tbody tr:last-child td.us{border-radius:0 0 10px 10px}
-td:first-child{color:color-mix(in srgb,var(--paper) 78%,transparent)}
+td:first-child{color:var(--paper);font-weight:600}
 :root[data-theme="dark"] .compare,:root:not([data-theme="light"]) .compare{}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .compare{background:#0A1E33;color:#EEF2F6} :root:not([data-theme="light"]) .compare h2{color:#EEF2F6}}
 :root[data-theme="dark"] .compare{background:#0A1E33;color:#EEF2F6}:root[data-theme="dark"] .compare h2{color:#EEF2F6}
@@ -141,9 +141,21 @@ td:first-child{color:color-mix(in srgb,var(--paper) 78%,transparent)}
 blockquote{font-family:"Bricolage Grotesque",sans-serif;font-variation-settings:"opsz" 48,"wdth" 95;font-size:clamp(1.3rem,2.4vw,1.75rem);font-weight:500;line-height:1.35;color:var(--navy)}
 blockquote footer{font-family:"Source Sans 3",sans-serif;font-size:1rem;color:var(--muted);margin-top:1rem;font-weight:600}
 .team{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.4rem;display:flex;gap:1rem;align-items:center}
-.avatar{width:72px;height:72px;border-radius:50%;background:var(--tint);flex:none;display:grid;place-items:center;color:var(--navy);font-weight:800;font-family:"Bricolage Grotesque",sans-serif;font-size:1.4rem}
+.avatar{width:72px;height:72px;border-radius:50%;background:var(--tint);flex:none;display:grid;place-items:center;color:var(--navy);font-weight:800;font-family:"Bricolage Grotesque",sans-serif;font-size:1.4rem;object-fit:cover}
 .team p{color:var(--muted);font-size:.95rem}
 @media(max-width:900px){.proof .wrap{grid-template-columns:1fr}}
+
+/* callback */
+.callback{padding-top:0}
+.cbbox{background:var(--navy);color:var(--paper);border-radius:18px;padding:2.2rem;display:grid;grid-template-columns:.8fr 1.4fr;gap:2rem;align-items:center}
+.cbbox h2{color:var(--paper);margin-bottom:.3rem}
+.cbbox p{color:color-mix(in srgb,var(--paper) 78%,transparent)}
+.cbbox form{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.cbbox label{display:block;font-size:.85rem;font-weight:700;margin-bottom:.3rem;color:color-mix(in srgb,var(--paper) 85%,transparent)}
+.cbbox input{width:100%;height:52px;font:inherit;padding:0 .9rem;border:0;border-radius:10px;background:#fff;color:#1C2430}
+.cbbox .btn{grid-column:1/-1;height:52px;justify-content:center;font-size:1.1rem}
+@media(max-width:900px){.cbbox{grid-template-columns:1fr;padding:1.6rem}}
+@media(max-width:480px){.cbbox form{grid-template-columns:1fr}}
 
 /* faq */
 details{border-bottom:1px solid var(--line);padding:1rem 0}
@@ -222,19 +234,20 @@ footer.site a:hover{text-decoration:underline}
         <h3>See what we'd pay for your property</h3>
         <p>Tell us about the property and we'll WhatsApp you a conditional offer today, with a firm offer after one short viewing.</p>
       </div>
-      <form onsubmit="event.preventDefault()">
-        <div><label for="name">Your name</label><input id="name"></div>
-        <div><label for="ph">Cellphone</label><input id="ph" type="tel" placeholder="072 000 0000"></div>
-        <div><label for="email">Email</label><input id="email" type="email"></div>
-        <div class="span2"><label for="addr">Property address</label><input id="addr" placeholder="12 Acacia Rd, Boksburg"></div>
-        <div><label for="type">Property type</label><select id="type"><option>House</option><option>Townhouse</option><option>Flat</option><option>Plot / other</option></select></div>
-        <div><label for="beds">Bedrooms</label><select id="beds"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5+</option></select></div>
-        <div><label for="cond">Condition</label><select id="cond"><option>Good</option><option>Needs some work</option><option>Needs major work</option></select></div>
-        <div><label for="occ">Who lives there?</label><select id="occ"><option>Owner</option><option>Tenants</option><option>Vacant</option></select></div>
-        <div><label for="bond">Outstanding bond (R)</label><input id="bond" inputmode="numeric" placeholder="650 000"></div>
-        <div><label for="arr">Arrears: bond, rates, levies (R)</label><input id="arr" inputmode="numeric" placeholder="0"></div>
-        <div><label for="why">Reason for selling</label><select id="why"><option>Behind on the bond</option><option>Deceased estate</option><option>Divorce / separation</option><option>Emigrating</option><option>Problem tenants</option><option>Damaged / unfinished</option><option>Other</option></select></div>
-        <div class="span3"><label for="urg">How soon do you need to sell?</label><select id="urg"><option>This week</option><option>This month</option><option>Within 3 months</option><option>Just exploring</option></select></div>
+      <form name="full-offer" method="POST" data-netlify="true" netlify-honeypot="company" action="/thanks.html">
+        <input type="hidden" name="form-name" value="full-offer"><p hidden><label>Company<input name="company"></label></p>
+        <div><label for="name">Your name</label><input id="name" name="name"></div>
+        <div><label for="ph">Cellphone</label><input id="ph" name="ph" type="tel" placeholder="072 000 0000"></div>
+        <div><label for="email">Email</label><input id="email" name="email" type="email"></div>
+        <div class="span2"><label for="addr">Property address</label><input id="addr" name="addr" placeholder="12 Acacia Rd, Boksburg"></div>
+        <div><label for="type">Property type</label><select id="type" name="type" required><option value="" selected disabled>Select</option><option>House</option><option>Townhouse</option><option>Flat</option><option>Other</option></select></div>
+        <div><label for="beds">Bedrooms</label><select id="beds" name="beds"><option value="" selected disabled>Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+        <div><label for="cond">Condition</label><select id="cond" name="cond"><option value="" selected disabled>Select</option><option>Good</option><option>Needs some work</option><option>Needs major work</option></select></div>
+        <div><label for="occ">Who lives there?</label><select id="occ" name="occ"><option value="" selected disabled>Select</option><option>Owner</option><option>Tenants</option><option>Vacant</option></select></div>
+        <div><label for="bond">Outstanding bond (R)</label><input id="bond" name="bond" inputmode="numeric" placeholder="650 000"></div>
+        <div><label for="arr">Arrears: bond, rates, levies (R)</label><input id="arr" name="arr" inputmode="numeric" placeholder="0"></div>
+        <div><label for="why">Reason for selling</label><select id="why" name="why"><option value="" selected disabled>Select</option><option>Behind on the bond</option><option>Deceased estate</option><option>Divorce / separation</option><option>Emigrating</option><option>Problem tenants</option><option>Damaged / unfinished</option><option>Other</option></select></div>
+        <div class="span3"><label for="urg">How soon do you need to sell?</label><select id="urg" name="urg"><option value="" selected disabled>Select</option><option>This week</option><option>This month</option><option>Within 3 months</option><option>Just exploring</option></select></div>
         <button class="btn btn-sold" type="submit">Get my cash offer</button>
         <small>No obligation. We never share your details. Your information is handled under POPIA.</small>
       </form>
@@ -254,12 +267,12 @@ footer.site a:hover{text-decoration:underline}
 <section id="how">
   <div class="wrap">
     <h2>From first call to money in the bank</h2>
-    <p style="color:var(--muted)">Four steps. Most sellers are paid within 48 hours.</p>
+    <p style="color:var(--muted)">Four steps. Most sellers are paid within 24 hours of signing.</p>
     <div class="steps">
       <div class="step"><h3>You tell us about the property</h3><p class="when">Within the hour</p><p>Address, condition, and what's owed on it. We come back to you with a conditional offer the same day.</p></div>
       <div class="step"><h3>We view it and make a firm offer</h3><p class="when">Within 24 hours</p><p>One short visit, then a firm offer in writing. No pressure to accept.</p></div>
       <div class="step"><h3>You sign, we take it from here</h3><p class="when">Within 24 hours</p><p>We draw up the offer to purchase and handle the bond, rates and levy arrears as part of the sale.</p></div>
-      <div class="step"><h3>Cash paid to you</h3><p class="when">Within 48 hours</p><p>Money in your account. You move when it suits you.</p></div>
+      <div class="step"><h3>Cash paid to you</h3><p class="when">Within 24 hours</p><p>Money in your account. You move when it suits you.</p></div>
     </div>
   </div>
 </section>
@@ -272,8 +285,8 @@ footer.site a:hover{text-decoration:underline}
       <table>
         <thead><tr><th></th><th class="us">SoldFast</th><th>Estate agent</th></tr></thead>
         <tbody>
-          <tr><td>Time to get an offer</td><td class="us">24 hours</td><td>Weeks to months</td></tr>
-          <tr><td>Time until cash is paid</td><td class="us">48 hours</td><td>3–6 months, on registration</td></tr>
+          <tr><td>Time to get an offer</td><td class="us">Same day</td><td>Weeks to months</td></tr>
+          <tr><td>Time until cash is paid</td><td class="us">24 hours</td><td>3–6 months, on registration</td></tr>
           <tr><td>Agent commission</td><td class="us">R0</td><td>5–7.5% + VAT</td></tr>
           <tr><td>Transfer and compliance costs</td><td class="us">R0 — we pay them</td><td>Averages R30 000, paid by you</td></tr>
           <tr><td>Repairs before sale</td><td class="us">None — we buy as is</td><td>You pay before listing</td></tr>
@@ -288,12 +301,12 @@ footer.site a:hover{text-decoration:underline}
   <div class="wrap">
     <h2>Whatever the reason, we've bought one like it</h2>
     <div class="grid3">
-      <div class="sit"><h3>Behind on the bond</h3><p>Missed payments, letters from the bank, or a summons already served. Selling before the bank sells keeps what's left of your equity in your pocket.</p><a href="#offer">Stop the repossession</a></div>
-      <div class="sit"><h3>Deceased estate</h3><p>Executor delays, siblings who disagree, a house nobody is living in. We buy from the estate and deal with the executor directly.</p><a href="#offer">Sell an inherited home</a></div>
-      <div class="sit"><h3>Divorce or separation</h3><p>One clean sale, split as the settlement says, without months of viewings.</p><a href="#offer">Sell and move on</a></div>
-      <div class="sit"><h3>Emigrating</h3><p>You need the money before the flight, not six months after. We can pay out before you leave.</p><a href="#offer">Sell before you go</a></div>
-      <div class="sit"><h3>Tenants who won't pay or leave</h3><p>We buy with tenants in place. You don't need to wait for them to leave before you sell.</p><a href="#offer">Sell with tenants in</a></div>
-      <div class="sit"><h3>Damaged or unfinished</h3><p>Fire, flood, a renovation that stalled, a roof that didn't survive the hail. No repairs, no certificates, no clean-up.</p><a href="#offer">Sell as it stands</a></div>
+      <div class="sit"><h3>Behind on the bond</h3><p>Missed payments, a letter of demand from the bank, or a summons already served. Sell to us before the bank forces a sale and keep what's left of your equity.</p><a href="#callback">Stop the repossession</a></div>
+      <div class="sit"><h3>Deceased estate</h3><p>Executor delays, siblings who disagree, a house nobody is living in. We buy from the estate and deal with the executor directly.</p><a href="#callback">Sell an inherited home</a></div>
+      <div class="sit"><h3>Divorce or separation</h3><p>One clean sale, split as the settlement says, without months of viewings.</p><a href="#callback">Sell and move on</a></div>
+      <div class="sit"><h3>Emigrating</h3><p>You need the money before the flight, not six months after. We can pay out before you leave.</p><a href="#callback">Sell before you go</a></div>
+      <div class="sit"><h3>Tenants who won't pay or leave</h3><p>We buy with tenants in place. You don't need to wait for them to leave before you sell.</p><a href="#callback">Sell with tenants in</a></div>
+      <div class="sit"><h3>Damaged or unfinished</h3><p>Fire, flood, a renovation that stalled, a roof that didn't survive the hail. No repairs, no certificates, no clean-up.</p><a href="#callback">Sell as it stands</a></div>
     </div>
   </div>
 </section>
@@ -307,8 +320,27 @@ footer.site a:hover{text-decoration:underline}
       <footer>Sipho N., Kempton Park — sold March 2026</footer>
     </blockquote>
     <div class="team">
-      <div class="avatar">WP</div>
+      <img class="avatar" src="werner.jpg" alt="Werner Prinsloo" width="72" height="72" onerror="this.outerHTML='<div class=avatar>WP</div>'">
       <div><h3>Werner Prinsloo</h3><p>Senior consultant. He's the person who views your property and makes the offer — not a call centre.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="callback" id="callback">
+  <div class="wrap">
+    <div class="cbbox">
+      <div>
+        <h2>Rather just talk to us?</h2>
+        <p>Leave your details and Werner will call you back. No forms, no obligation.</p>
+      </div>
+      <form name="callback" method="POST" data-netlify="true" netlify-honeypot="company" action="/thanks.html">
+        <input type="hidden" name="form-name" value="callback"><p hidden><label>Company<input name="company"></label></p>
+        <div><label for="cb-name">Your name</label><input id="cb-name" name="name" required></div>
+        <div><label for="cb-ph">Cellphone</label><input id="cb-ph" name="phone" type="tel" required placeholder="072 000 0000"></div>
+        <div><label for="cb-email">Email</label><input id="cb-email" name="email" type="email"></div>
+        <div><label for="cb-addr">Property address</label><input id="cb-addr" name="address" required placeholder="12 Acacia Rd, Boksburg"></div>
+        <button class="btn btn-sold" type="submit">Call me back</button>
+      </form>
     </div>
   </div>
 </section>
@@ -317,9 +349,9 @@ footer.site a:hover{text-decoration:underline}
   <div class="wrap" style="max-width:780px">
     <h2>Questions sellers ask us</h2>
     <details><summary>How much less than market value will you offer?</summary><p>Typically 20–30% below what an agent would list at. In return you pay no commission, no transfer costs, no repairs, no compliance certificates, and no further months of bond and rates while you wait for a buyer.</p></details>
-    <details><summary>What kind of property do you buy?</summary><p>Houses, townhouses, flats and plots anywhere in Gauteng, in any condition — tenanted, vacant, damaged, unfinished or tied up in an estate.</p></details>
+    <details><summary>What kind of property do you buy?</summary><p>Houses, townhouses and flats anywhere in Gauteng, in any condition — tenanted, vacant, damaged, unfinished or tied up in an estate.</p></details>
     <details><summary>Can you buy if the bank has already started legal action?</summary><p>Yes, as long as the property hasn't been sold at auction yet. We deal with the bank's attorneys directly and the arrears are handled as part of the sale.</p></details>
-    <details><summary>Do I have to move out immediately?</summary><p>No. We agree the occupation date with you. Some sellers stay on for a few weeks after the deposit is paid while they find their next home.</p></details>
+    <details><summary>Do I have to move out immediately?</summary><p>No. We agree the occupation date with you. We can also pay a deposit upfront to help with moving costs or the rent on your next home, with the balance paid when you hand over.</p></details>
     <details><summary>Which areas do you buy in?</summary><p>All of Gauteng.</p></details>
   </div>
 </section>
@@ -330,7 +362,7 @@ footer.site a:hover{text-decoration:underline}
     <p>Message us on WhatsApp with your suburb and we'll reply within the hour, seven days a week.</p>
     <div class="ctas">
       <a class="btn btn-wa" href="https://wa.me/27723886161">WhatsApp 072 388 6161</a>
-      <a class="btn btn-ghost" href="#offer">Fill in the form instead</a>
+      <a class="btn btn-ghost" href="#callback">Ask us to call you back</a>
     </div>
   </div>
 </section>
@@ -339,7 +371,7 @@ footer.site a:hover{text-decoration:underline}
   <div class="wrap">
     <div>
       <a class="logo" href="#"><span>Sold</span><b>Fast</b></a>
-      <p style="margin-top:.8rem">SoldFast<br>441 Ridgeview Road, Waterkloof Ridge, Pretoria<br>Mon–Sun 07:00–20:00</p>
+      <p style="margin-top:.8rem">SoldFast<br>441 Ridgeview Road, Waterkloof Ridge, Pretoria<br>Mon–Fri 09:00–17:00</p>
     </div>
     <ul>
       <li><a href="#">Sell a house fast in Johannesburg</a></li>
@@ -350,15 +382,15 @@ footer.site a:hover{text-decoration:underline}
     <ul>
       <li><a href="#">Stop a repossession</a></li>
       <li><a href="#">Sell a deceased estate property</a></li>
-      <li><a href="#">Privacy notice (POPIA)</a></li>
-      <li><a href="#">Terms</a></li>
+      <li><a href="privacy.html">Privacy notice (POPIA)</a></li>
+      <li><a href="terms.html">Terms of use</a></li>
     </ul>
   </div>
 </footer>
 
 <div class="bar">
   <a class="btn btn-wa" href="https://wa.me/27723886161">WhatsApp</a>
-  <a class="btn btn-sold" href="#offer">Get my offer</a>
+  <a class="btn btn-sold" href="#callback">Call me back</a>
 </div>
 
 </body>
